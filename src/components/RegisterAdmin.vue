@@ -54,6 +54,19 @@
           </div>
         </div>
         <div class="row">
+          <div class="input-field col s12">
+            <input
+              id="confirmPassword"
+              type="password"
+              class="validate"
+              minlength="8"
+              v-model="confirmPassword"
+              required
+            />
+            <label for="confirmPassword">確認用パスワード</label>
+          </div>
+        </div>
+        <div class="row">
           <div class="input-field col s6">
             <button
               class="btn btn-large btn-register waves-effect waves-light"
@@ -84,10 +97,12 @@ export default class RegisterAdmin extends Vue {
   lastName = "";
   // 名
   firstName = "";
-  // メールアドrす
+  // メールアドレス
   mailAddress = "";
   // パスワード
   password = "";
+  // 確認用パスワード
+  confirmPassword = "";
 
   /**
    * 管理者情報を登録する.
@@ -97,7 +112,7 @@ export default class RegisterAdmin extends Vue {
    * @returns Promiseオブジェクト
    */
   async registerAdmin(): Promise<void> {
-    // エラーチェック
+    // 入力値エラーチェック
     this.errors = [];
     if (this.lastName === "" || this.firstName === "") {
       this.errors.push("姓または名が入力されていません");
@@ -108,6 +123,12 @@ export default class RegisterAdmin extends Vue {
     if (this.password === "") {
       this.errors.push("パスワードが入力されていません");
     }
+
+    // パスワード一致チェック
+    if (this.password !== this.confirmPassword) {
+      this.errors.push("パスワードが不一致です");
+    }
+
     // エラーが１つ以上あれば処理を止める
     if (0 < this.errors.length) {
       return;
