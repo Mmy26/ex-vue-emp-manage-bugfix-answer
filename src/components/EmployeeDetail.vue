@@ -56,7 +56,7 @@
             <tr>
               <th nowrap>給料</th>
               <td>
-                <span>{{ currentEmployee.salary }}円</span>
+                <span>{{ currentEmployee.formatSalary }}円</span>
               </td>
             </tr>
             <tr>

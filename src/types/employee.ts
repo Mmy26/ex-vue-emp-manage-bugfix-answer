@@ -37,7 +37,11 @@ export class Employee {
     private _dependentsCount: number
   ) {}
 
-  // 入社日を「yyyy年MM月dd日」という形でフォーマットして返すGetter
+  /**
+   * 入社日を「YYYY年MM月DD日」という形でフォーマットして返すGetter.
+   *
+   * @returns 「YYYY年MM月DD日」という形でフォーマットされた入社日
+   */
   public get formatHireDate(): string {
     // ↓これだと「RangeError: Invalid time value」が出てしまいうまくフォーマットできない
     // return format(this.hireDate, "yyyy年MM月dd日");
@@ -45,6 +49,15 @@ export class Employee {
     // そのためmoment関数を使う(上のimport文のコメントにも説明を記載しています)
     // https://momentjs.com/
     return moment(this.hireDate).format("YYYY年MM月DD日");
+  }
+
+  /**
+   * 給料をカンマ区切りでフォーマットして返すGetter.
+   *
+   * @returns カンマ区切りでフォーマットされた給料
+   */
+  public get formatSalary(): string {
+    return this.salary.toLocaleString();
   }
 
   public get id(): number {
