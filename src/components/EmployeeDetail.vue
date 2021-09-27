@@ -19,7 +19,7 @@
             <tr>
               <th nowrap>従業員名</th>
               <td>
-                <span>{{ currentEmployee.name }}</span>
+                <span v-html="currentEmployee.name"></span>
               </td>
             </tr>
             <tr>
@@ -31,49 +31,45 @@
             <tr>
               <th nowrap>性別</th>
               <td>
-                <span>{{ currentEmployee.gender }}</span>
+                <span v-html="currentEmployee.gender"></span>
               </td>
             </tr>
             <tr>
               <th nowrap>入社日</th>
-              <td>
-                <span>{{ currentEmployee.formatHireDate }}</span>
-              </td>
+              <td><span v-html="currentEmployee.formatHireDate"></span></td>
             </tr>
             <tr>
               <th nowrap>メールアドレス</th>
               <td>
-                <span>{{ currentEmployee.mailAddress }}</span>
+                <span v-html="currentEmployee.mailAddress"></span>
               </td>
             </tr>
             <tr>
               <th nowrap>郵便番号</th>
               <td>
-                <span>{{ currentEmployee.zipCode }}</span>
+                <span v-html="currentEmployee.zipCode"></span>
               </td>
             </tr>
             <tr>
               <th nowrap>住所</th>
               <td>
-                <span>{{ currentEmployee.address }}</span>
+                <span v-html="currentEmployee.address"></span>
               </td>
             </tr>
             <tr>
               <th nowrap>電話番号</th>
               <td>
-                <span>{{ currentEmployee.telephone }}</span>
+                <span v-html="currentEmployee.telephone"></span>
               </td>
             </tr>
             <tr>
               <th nowrap>給料</th>
-              <td>
-                <span>{{ currentEmployee.formatSalary }}円</span>
-              </td>
+              <td><span v-html="currentEmployee.formatSalary"></span>円</td>
             </tr>
             <tr>
               <th nowrap>特性</th>
               <td>
-                <span>{{ currentEmployee.characteristics }}</span>
+                <span v-html="currentEmployee.characteristics"></span>
               </td>
             </tr>
             <tr>
