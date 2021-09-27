@@ -41,4 +41,8 @@ export default {
 .error {
   color: red;
 }
+
+nav {
+  margin-bottom: 20px;
+}
 </style>

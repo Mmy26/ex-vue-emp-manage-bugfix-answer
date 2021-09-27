@@ -1,5 +1,13 @@
 <template>
   <div class="container">
+    <!-- パンくずリスト -->
+    <nav>
+      <div class="nav-wrapper">
+        <div class="col s12 teal">
+          <a class="breadcrumb">従業員リスト</a>
+        </div>
+      </div>
+    </nav>
     <div>従業員数:{{ getEmployeeCount }}人</div>
     <div class="row">
       <table class="striped">

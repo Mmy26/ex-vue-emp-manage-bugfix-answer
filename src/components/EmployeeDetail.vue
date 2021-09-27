@@ -1,5 +1,16 @@
 <template>
   <div class="container">
+    <!-- パンくずリスト -->
+    <nav>
+      <div class="nav-wrapper">
+        <div class="col s12 teal">
+          <router-link to="/employeeList" class="breadcrumb"
+            >従業員リスト</router-link
+          >
+          <a class="breadcrumb">従業員詳細</a>
+        </div>
+      </div>
+    </nav>
     <div class="row">
       <form>
         <fieldset>
