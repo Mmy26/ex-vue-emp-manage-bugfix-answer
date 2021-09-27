@@ -1,5 +1,5 @@
 {
-  "name": "ex-emp-manage-vue-ts-answer",
+  "name": "ex-vue-emp-manage-bugfix-answer",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "date-fns": "^2.24.0",
+    "moment": "^2.29.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
