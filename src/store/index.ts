@@ -112,6 +112,20 @@ export default new Vuex.Store({
         return employees[0];
       };
     },
+    /**
+     * 従業員を名前で部分一致検索をする.
+     *
+     * @param state ステート
+     * @returns 部分一致検索で検索された従業員一覧情報
+     */
+    getSearchEmployeeByName(state) {
+      // 部分一致で絞り込んだemployeeオブジェクトのみを返す
+      return (name: string) => {
+        return state.employees.filter((employee) =>
+          employee.name.includes(name)
+        );
+      };
+    },
   }, // end getters
   modules: {}, // end modules
 });
