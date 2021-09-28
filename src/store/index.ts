@@ -80,21 +80,21 @@ export default new Vuex.Store({
   }, // end mutations
   getters: {
     /**
-     * 従業員数を返す.
+     * 全従業員数を返す.
      *
      * @param state ステート
      * @returns 従業員数
      */
-    getEmployeeCount(state) {
+    getAllEmployeeCount(state) {
       return state.employees.length;
     },
     /**
-     * 従業員一覧を返す.
+     * 全従業員一覧を返す.
      *
      * @param state ステート
      * @returns 従業員一覧情報「
      */
-    getEmployees(state) {
+    getAllEmployees(state) {
       return state.employees;
     },
     /**
