@@ -135,11 +135,14 @@ export default class RegisterAdmin extends Vue {
     }
 
     // 管理者登録処理
-    const response = await axios.post("http://localhost:8080/ex-emp/insert", {
-      name: this.lastName + " " + this.firstName,
-      mailAddress: this.mailAddress,
-      password: this.password,
-    });
+    const response = await axios.post(
+      "http://153.127.48.168:8080/ex-emp-api/insert",
+      {
+        name: this.lastName + " " + this.firstName,
+        mailAddress: this.mailAddress,
+        password: this.password,
+      }
+    );
     console.dir("response:" + JSON.stringify(response));
     if (response.data.status === "success") {
       // 成功ならログイン画面に遷移する

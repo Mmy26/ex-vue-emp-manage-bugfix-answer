@@ -12,7 +12,9 @@ export default class LogoutAdmin extends Vue {
    * @returns Promiseオブジェクト
    */
   async logoutAdmin(): Promise<void> {
-    const response = await axios.get("http://localhost:8080/ex-emp/logout");
+    const response = await axios.get(
+      "http://153.127.48.168:8080/ex-emp-api/logout"
+    );
     console.dir("response:" + JSON.stringify(response));
     // ログイン画面に遷移する
     this["$router"].push("/loginAdmin");

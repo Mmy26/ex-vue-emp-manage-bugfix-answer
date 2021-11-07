@@ -145,7 +145,7 @@ export default class EmployeeDetail extends Vue {
    */
   async update(): Promise<void> {
     const response = await axios.post(
-      "http://localhost:8080/ex-emp/employee/update",
+      "http://153.127.48.168:8080/ex-emp-api/employee/update",
       {
         id: this.currentEmployee.id,
         dependentsCount: this.currentDependentsCount,

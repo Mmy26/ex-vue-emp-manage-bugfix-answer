@@ -123,7 +123,7 @@ export default class EmployeeList extends Vue {
   // 検索文字列メッセージ
   searchNameMessage = "";
   // １ページに表示される最大の従業員の数
-  readonly MAX_EMPLOYEE_COUNT = 3;
+  readonly MAX_EMPLOYEE_COUNT = 5;
   // 画面下に表示されるページ番号
   pageNums: Array<number> = [];
   // 現在表示されているページ数

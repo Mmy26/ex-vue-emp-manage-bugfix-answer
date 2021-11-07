@@ -23,7 +23,7 @@ export default new Vuex.Store({
     async getEmployeeList(context) {
       // WebAPIから従業員一覧情報を取得する
       const response = await axios.get(
-        "http://localhost:8080/ex-emp/employee/employees"
+        "http://153.127.48.168:8080/ex-emp-api/employee/employees"
       );
       // 取得したJSONデータをコンソールに出力して確認
       console.dir("response:" + JSON.stringify(response));
