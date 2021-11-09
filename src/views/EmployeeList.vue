@@ -26,7 +26,7 @@
         </div>
       </form>
     </div>
-    <div>従業員数:{{ getEmployeeCount }}人</div>
+    <div>従業員数:{{ employeeCount }}人</div>
     <div class="row">
       <table class="striped">
         <thead>
@@ -116,14 +116,12 @@ import { Employee } from "@/types/employee";
 export default class EmployeeList extends Vue {
   // 従業員一覧
   currentEmployeeList: Array<Employee> = [];
-  // // 従業員数
-  // employeeCount = 0;
   // 検索文字列
   searchName = "";
   // 検索文字列メッセージ
   searchNameMessage = "";
   // １ページに表示される最大の従業員の数
-  readonly MAX_EMPLOYEE_COUNT = 5;
+  readonly MAX_EMPLOYEE_COUNT = 10;
   // 画面下に表示されるページ番号
   pageNums: Array<number> = [];
   // 現在表示されているページ数
@@ -142,34 +140,30 @@ export default class EmployeeList extends Vue {
    * 取得してからゲットするため、async awaitを利用している。
    */
   async created(): Promise<void> {
-    await this["$store"].dispatch("getEmployeeList");
+    await this.$store.dispatch("getEmployeeList");
 
     // 従業員一覧情報をVuexストアから取得
     // 非同期で外部APIから取得しているので、async/await使わないとGetterで取得できない
     // ページング機能実装のため最初の10件に絞り込み
-    this.currentEmployeeList = this["$store"].getters.getAllEmployees;
+    this.currentEmployeeList = this.$store.getters.getAllEmployees;
 
     // 初期表示
     this.initialDisplay();
 
     // 画面下のページ数番号を作成
     // 全従業員数を取得
-    let allEmployeeCount = this["$store"].getters.getAllEmployeeCount;
+    let allEmployeeCount = this.$store.getters.getAllEmployeeCount;
 
     // 下のページング用のリンク数値を作成する(例：22人の場合だと3ページ)
     this.createLinkNumberForPaging(allEmployeeCount);
-    // this.maxPageNum = Math.ceil(allEmployeeCount / this.MAX_EMPLOYEE_COUNT);
-    // for (let i = 1; i <= this.maxPageNum; i++) {
-    //   this.pageNums.push(i);
-    // }
   }
   /**
    * 現在表示されている従業員一覧の数を返す.
    *
    * @returns 現在表示されている従業員一覧の数
    */
-  get getEmployeeCount(): number {
-    return this.currentEmployeeList.length;
+  get employeeCount(): void {
+    return this.$store.getters.getAllEmployeeCount;
   }
 
   /**
@@ -182,14 +176,14 @@ export default class EmployeeList extends Vue {
    */
   onSearchClick(): void {
     // 入力された文字列で絞り込みを行う
-    this.currentEmployeeList = this["$store"].getters.getSearchEmployeeByName(
+    this.currentEmployeeList = this.$store.getters.getSearchEmployeeByName(
       this.searchName
     );
 
     // 検索されない場合は、メッセージを出して全件検索を行う
     if (this.currentEmployeeList.length == 0 || this.searchName === "") {
       this.searchNameMessage = "１件もありませんでしたので全件検索します";
-      this.currentEmployeeList = this["$store"].getters.getAllEmployees;
+      this.currentEmployeeList = this.$store.getters.getAllEmployees;
       this.searchName = "";
     }
     // 下のページング用のリンク数値を作成する(例：22人の場合だと3ページ)
@@ -217,10 +211,10 @@ export default class EmployeeList extends Vue {
 
     if (this.searchName === "") {
       // 検索入力欄に何も書かれていなかった場合、全従業員一覧情報をVuexストアから取得
-      this.currentEmployeeList = this["$store"].getters.getAllEmployees;
+      this.currentEmployeeList = this.$store.getters.getAllEmployees;
     } else {
       // 検索入力欄に書かれていた場合、入力された文字列で絞り込みを行う
-      this.currentEmployeeList = this["$store"].getters.getSearchEmployeeByName(
+      this.currentEmployeeList = this.$store.getters.getSearchEmployeeByName(
         this.searchName
       );
     }

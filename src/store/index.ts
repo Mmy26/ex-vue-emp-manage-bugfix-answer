@@ -46,28 +46,10 @@ export default new Vuex.Store({
       // console.dir("payload:" + JSON.stringify(payload));
       console.log("totalEmployeeCount:" + payload.totalEmployeeCount);
       // payloadの中(WebAPIから取得したJSON)のtotalEmployeeCountをstateのtotalEmployeeCountに代入する
-      state.totalEmployeeCount = payload.totalEmployees;
-      // payloadの中(WebAPIから取得したJSON)のemployeesをfor..of文で回し１回１回Employeeオブジェクト生成し、
-      // stateのemployeesにpushする
-      state.employees = new Array<Employee>();
-      for (const employee of payload.employees) {
-        state.employees.push(
-          new Employee(
-            employee.id,
-            employee.name,
-            employee.image,
-            employee.gender,
-            employee.hireDate,
-            employee.mailAddress,
-            employee.zipCode,
-            employee.address,
-            employee.telephone,
-            employee.salary,
-            employee.characteristics,
-            employee.dependentsCount
-          )
-        );
-      }
+      state.totalEmployeeCount = payload.totalEmployeeCount;
+      // payloadの中(WebAPIから取得したJSON)のemployeesをstateのemployeesに代入する
+      state.employees = payload.employees;
+
       // 入社日の降順で(新しい入社日の人が上に来るように)並び替え
       state.employees.sort(function(boforeEmployee, afterEmployee) {
         if (afterEmployee.hireDate > boforeEmployee.hireDate) {
@@ -86,7 +68,7 @@ export default new Vuex.Store({
      * @returns 従業員数
      */
     getAllEmployeeCount(state) {
-      return state.employees.length;
+      return state.totalEmployeeCount;
     },
     /**
      * 全従業員一覧を返す.

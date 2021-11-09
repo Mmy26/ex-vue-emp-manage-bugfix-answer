@@ -17,7 +17,7 @@ export default class LogoutAdmin extends Vue {
     );
     console.dir("response:" + JSON.stringify(response));
     // ログイン画面に遷移する
-    this["$router"].push("/loginAdmin");
+    this.$router.push("/loginAdmin");
   }
 }
 </script>
