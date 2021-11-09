@@ -112,6 +112,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Employee } from "@/types/employee";
+
 @Component
 export default class EmployeeList extends Vue {
   // 従業員一覧

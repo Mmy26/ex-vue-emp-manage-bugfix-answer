@@ -1,5 +1,9 @@
+<template>
+  <div>dummy</div>
+</template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import config from "@/const/const";
 import axios from "axios";
 
 @Component
@@ -11,10 +15,10 @@ export default class LogoutAdmin extends Vue {
    * 本メソッドは非同期でWebAPIを呼び出しログアウトをするためasync/await axiosを利用しています。これらを利用する場合は明示的に戻り値にPromiseオブジェクト型を指定する必要があります。
    * @returns Promiseオブジェクト
    */
-  async logoutAdmin(): Promise<void> {
-    const response = await axios.get(
-      "http://153.127.48.168:8080/ex-emp-api/logout"
-    );
+  async created(): Promise<void> {
+    console.log("logout!");
+
+    const response = await axios.get(`${config.EMP_WEBAPI_URL}/logout`);
     console.dir("response:" + JSON.stringify(response));
     // ログイン画面に遷移する
     this.$router.push("/loginAdmin");

@@ -105,7 +105,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-// import { Employee } from "../types/employee";
+import config from "@/const/const";
 import { Employee } from "@/types/employee";
 import axios from "axios";
 
@@ -132,7 +132,7 @@ export default class EmployeeDetail extends Vue {
     // VuexストアのGetter、getEmployeeById()メソッドに先ほど取得したIDを渡し、１件の従業員情報を取得し、戻り値をcurrentEmployee属性に代入する
     this.currentEmployee = this.$store.getters.getEmployeeById(employeeId);
     // 今取得した従業員情報から画像パスを取り出し、imgディレクトリの名前を前に付与(文字列連結)してcurrentEmployeeImage属性に代入する
-    this.currentEmployeeImage = "/img/" + this.currentEmployee.image;
+    this.currentEmployeeImage = `${config.EMP_WEBAPI_URL}/img/${this.currentEmployee.image}`;
     // 今取得した従業員情報から扶養人数を取り出し、currentDependentsCount属性に代入する
     this.currentDependentsCount = this.currentEmployee.dependentsCount;
   }
@@ -145,7 +145,7 @@ export default class EmployeeDetail extends Vue {
    */
   async update(): Promise<void> {
     const response = await axios.post(
-      "http://153.127.48.168:8080/ex-emp-api/employee/update",
+      `${config.EMP_WEBAPI_URL}/employee/update`,
       {
         id: this.currentEmployee.id,
         dependentsCount: this.currentDependentsCount,

@@ -1,9 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { Employee } from "@/types/employee";
-// 使うためには「
-// npm install axios --save
-//」を行う
+import config from "@/const/const";
+// 使うためには「npm install axios --save」を行う
 import axios from "axios";
 
 Vue.use(Vuex);
@@ -23,7 +22,7 @@ export default new Vuex.Store({
     async getEmployeeList(context) {
       // WebAPIから従業員一覧情報を取得する
       const response = await axios.get(
-        "http://153.127.48.168:8080/ex-emp-api/employee/employees"
+        `${config.EMP_WEBAPI_URL}/employee/employees`
       );
       // 取得したJSONデータをコンソールに出力して確認
       console.dir("response:" + JSON.stringify(response));
