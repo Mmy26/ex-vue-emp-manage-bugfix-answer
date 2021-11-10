@@ -1,7 +1,4 @@
-// 外部APIから取得した日付データ「yyyy-MM-dd」は date-fnsのformat関数だとうまくフォーマットできない
-// そのためmomentというライブラリを使用する
-// 「npm install moment」を実施する必要あり
-import moment from "moment";
+import { format } from "date-fns";
 
 /**
  * 従業員情報を表すクラス.
@@ -40,15 +37,11 @@ export class Employee {
   /**
    * 入社日を「YYYY年MM月DD日」という形でフォーマットして返すGetter.
    *
+   *
    * @returns 「YYYY年MM月DD日」という形でフォーマットされた入社日
    */
   public get formatHireDate(): string {
-    // ↓これだと「RangeError: Invalid time value」が出てしまいうまくフォーマットできない
-    // return format(this.hireDate, "yyyy年MM月dd日");
-
-    // そのためmoment関数を使う(上のimport文のコメントにも説明を記載しています)
-    // https://momentjs.com/
-    return moment(this.hireDate).format("YYYY年MM月DD日");
+    return format(this.hireDate, "yyyy年MM月dd日");
   }
 
   /**
