@@ -127,6 +127,12 @@ export default class EmployeeDetail extends Vue {
    * ライフサイクルフックのcreatedイベント利用
    */
   created(): void {
+    // ログインしていなければログイン画面へ遷移
+    if (this.$store.getters.getLoginStatus == false) {
+      this.$router.push("/loginAdmin");
+      return;
+    }
+
     // 送られてきたリクエストパラメータのidをnumberに変換して取得する
     const employeeId = parseInt(this.$route.params.id);
     // VuexストアのGetter、getEmployeeById()メソッドに先ほど取得したIDを渡し、１件の従業員情報を取得し、戻り値をcurrentEmployee属性に代入する
