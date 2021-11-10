@@ -77,6 +77,8 @@ export default class LoginAdmin extends Vue {
     });
     console.dir("response:" + JSON.stringify(response));
     if (response.data.status == "success") {
+      // ログイン状態にする(stateのsessionStorage内のisLoginをtrueにする)
+      this.$store.commit("logined");
       // 従業員一覧に遷移する
       this.$router.push("/employeeList");
     } else {
