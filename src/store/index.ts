@@ -12,8 +12,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   strict: true,
   state: {
+    // ログインされているかどうかのフラグ(ログイン時:true/ログアウト時:false)
     isLogin: false,
+    // 従業員数
     totalEmployeeCount: 0,
+    // 従業員一覧
     employees: new Array<Employee>(),
   }, // end state
   actions: {
@@ -165,6 +168,7 @@ export default new Vuex.Store({
       key: "vuex",
       // ストレージの種類を指定
       storage: window.sessionStorage,
+      // isLoginフラグのみセッションストレージに格納しブラウザ更新しても残るようにしている(ログイン時:true / ログアウト時:false)
       paths: ["isLogin"],
     }),
   ],
