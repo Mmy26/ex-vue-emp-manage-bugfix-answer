@@ -108,6 +108,7 @@ import { Component, Vue } from "vue-property-decorator";
 import config from "@/const/const";
 import { Employee } from "@/types/employee";
 import axios from "axios";
+import { parse } from "date-fns";
 
 @Component
 export default class EmployeeDetail extends Vue {
@@ -143,7 +144,7 @@ export default class EmployeeDetail extends Vue {
    * Vuexストア内のGetterを呼ぶ。
    * ライフサイクルフックのcreatedイベント利用
    */
-  created(): void {
+  async created(): Promise<void> {
     // ログインしていなければログイン画面へ遷移
     if (this.$store.getters.getLoginStatus == false) {
       this.$router.push("/loginAdmin");
@@ -152,10 +153,35 @@ export default class EmployeeDetail extends Vue {
 
     // 送られてきたリクエストパラメータのidをnumberに変換して取得する
     const employeeId = parseInt(this.$route.params.id);
+
     // VuexストアのGetter、getEmployeeById()メソッドに先ほど取得したIDを渡し、１件の従業員情報を取得し、戻り値をcurrentEmployee属性に代入する
-    this.currentEmployee = this.$store.getters.getEmployeeById(employeeId);
+    // this.currentEmployee = this.$store.getters.getEmployeeById(employeeId);
+
+    const response = await axios.get(
+      `${config.EMP_WEBAPI_URL}/employee/${employeeId}`
+    );
+    console.dir(JSON.stringify(response));
+    let responseEmployee = response.data.employee;
+    this.currentEmployee = new Employee(
+      responseEmployee.id,
+      responseEmployee.name,
+      responseEmployee.image,
+      responseEmployee.gender,
+      // 入社日を文字列からDateオブジェクトに変換(parse使用時月を-1しなくても問題ない作りになっている)
+      // https://date-fns.org/v2.25.0/docs/parse 一番下のExamplesに記載
+      parse(responseEmployee.hireDate, "yyyy-MM-dd", new Date()),
+      responseEmployee.mailAddress,
+      responseEmployee.zipCode,
+      responseEmployee.address,
+      responseEmployee.telephone,
+      responseEmployee.salary,
+      responseEmployee.characteristics,
+      responseEmployee.dependentsCount
+    );
+
     // 今取得した従業員情報から画像パスを取り出し、imgディレクトリの名前を前に付与(文字列連結)してcurrentEmployeeImage属性に代入する
     this.currentEmployeeImage = `${config.EMP_WEBAPI_URL}/img/${this.currentEmployee.image}`;
+
     // 今取得した従業員情報から扶養人数を取り出し、currentDependentsCount属性に代入する
     this.currentDependentsCount = this.currentEmployee.dependentsCount;
   }
