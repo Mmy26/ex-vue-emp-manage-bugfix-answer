@@ -113,22 +113,25 @@
 import { Component, Vue } from "vue-property-decorator";
 import { Employee } from "@/types/employee";
 
+/**
+ * 従業員一覧を表示する画面.
+ */
 @Component
 export default class EmployeeList extends Vue {
   // 従業員一覧
-  currentEmployeeList: Array<Employee> = [];
+  private currentEmployeeList: Array<Employee> = [];
   // 検索文字列
-  searchName = "";
+  private searchName = "";
   // 検索文字列メッセージ
-  searchNameMessage = "";
+  private searchNameMessage = "";
   // １ページに表示される最大の従業員の数
-  readonly MAX_EMPLOYEE_COUNT = 10;
+  private readonly MAX_EMPLOYEE_COUNT = 10;
   // 画面下に表示されるページ番号
-  pageNums: Array<number> = [];
+  private pageNums: Array<number> = [];
   // 現在表示されているページ数
-  currentPageNum = 1;
+  private currentPageNum = 1;
   // 最大のページ数
-  maxPageNum = 0;
+  private maxPageNum = 0;
 
   /**
    * Vuexストアのアクション経由で非同期でWebAPIから従業員一覧を取得する.

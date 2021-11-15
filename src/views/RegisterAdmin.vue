@@ -88,22 +88,25 @@ import { Component, Vue } from "vue-property-decorator";
 import config from "@/const/const";
 import axios from "axios";
 
+/**
+ * 管理者情報を登録する画面.
+ */
 @Component
 export default class RegisterAdmin extends Vue {
   // 入力値チェックのエラーメッセージ
-  errors: Array<string> = [];
+  private errors: Array<string> = [];
   // 登録失敗時のエラーメッセージ
-  errorMessage = "";
+  private errorMessage = "";
   // 姓
-  lastName = "";
+  private lastName = "";
   // 名
-  firstName = "";
+  private firstName = "";
   // メールアドレス
-  mailAddress = "";
+  private mailAddress = "";
   // パスワード
-  password = "";
+  private password = "";
   // 確認用パスワード
-  confirmPassword = "";
+  private confirmPassword = "";
 
   /**
    * 管理者情報を登録する.

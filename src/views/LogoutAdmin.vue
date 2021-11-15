@@ -6,6 +6,9 @@ import { Component, Vue } from "vue-property-decorator";
 import config from "@/const/const";
 import axios from "axios";
 
+/**
+ * ログアウトをする画面.
+ */
 @Component
 export default class LogoutAdmin extends Vue {
   /**
