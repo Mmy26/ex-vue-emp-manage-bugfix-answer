@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "axios-jsonp": "^1.0.4",
     "core-js": "^3.6.5",
     "date-fns": "^2.25.0",
     "moment": "^2.29.1",
