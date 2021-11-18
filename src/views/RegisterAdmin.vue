@@ -1,12 +1,10 @@
 <template>
   <div class="container">
     <div class="row register-page">
-      <div class="error" v-for="error of errors" v-bind:key="error">
-        {{ error }}
-      </div>
       <div class="error">{{ errorMessage }}</div>
       <form class="col s12" id="reg-form">
         <div class="row">
+          <div class="error">{{ errorOfName }}</div>
           <div class="input-field col s6">
             <input
               id="last_name"
@@ -29,6 +27,7 @@
           </div>
         </div>
         <div class="row">
+          <div class="error">{{ errorOfMailAddress }}</div>
           <div class="input-field col s12">
             <input
               id="email"
@@ -41,6 +40,7 @@
           </div>
         </div>
         <div class="row">
+          <div class="error">{{ errorOfPassword }}</div>
           <div class="input-field col s12">
             <input
               id="password"
@@ -131,8 +131,12 @@ import axios from "axios";
  */
 @Component
 export default class RegisterAdmin extends Vue {
-  // 入力値チェックのエラーメッセージ
-  private errors: Array<string> = [];
+  // 姓名エラーメッセージ
+  private errorOfName = "";
+  // メールアドレスエラーメッセージ
+  private errorOfMailAddress = "";
+  // パスワードエラーメッセージ
+  private errorOfPassword = "";
   // 登録失敗時のエラーメッセージ
   private errorMessage = "";
   // 姓
@@ -158,25 +162,8 @@ export default class RegisterAdmin extends Vue {
    * @returns Promiseオブジェクト
    */
   async registerAdmin(): Promise<void> {
-    // 入力値エラーチェック
-    this.errors = [];
-    if (this.lastName === "" || this.firstName === "") {
-      this.errors.push("姓または名が入力されていません");
-    }
-    if (this.mailAddress === "") {
-      this.errors.push("メールアドレスが入力されていません");
-    }
-    if (this.password === "") {
-      this.errors.push("パスワードが入力されていません");
-    }
-
-    // パスワード一致チェック
-    if (this.password !== this.confirmPassword) {
-      this.errors.push("パスワードが不一致です");
-    }
-
-    // エラーが１つ以上あれば処理を止める
-    if (0 < this.errors.length) {
+    // 入力値エラーチェックし、エラーが１つ以上あれば処理を止める
+    if (this.hasErrors() == true) {
       return;
     }
 
@@ -212,6 +199,37 @@ export default class RegisterAdmin extends Vue {
     });
     console.dir(JSON.stringify(response));
     this.address = response.data.items[0].address;
+  }
+
+  /**
+   * エラーチェック処理.
+   *
+   * @returns エラーがある:true / エラーがない:false
+   */
+  private hasErrors(): boolean {
+    let hasError = false;
+    this.errorOfName = "";
+    this.errorOfMailAddress = "";
+    this.errorOfPassword = "";
+
+    if (this.lastName === "" || this.firstName === "") {
+      this.errorOfName = "姓または名が入力されていません";
+      hasError = true;
+    }
+    if (this.mailAddress === "") {
+      this.errorOfMailAddress = "メールアドレスが入力されていません";
+      hasError = true;
+    }
+    if (this.password === "") {
+      this.errorOfPassword = "パスワードが入力されていません";
+      hasError = true;
+    } else if (this.password !== this.confirmPassword) {
+      // パスワード一致チェック
+      this.errorOfPassword = "パスワードが不一致です";
+      hasError = true;
+    }
+
+    return hasError;
   }
 }
 </script>
