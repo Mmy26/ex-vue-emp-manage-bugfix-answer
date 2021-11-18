@@ -263,16 +263,19 @@ export default class EmployeeList extends Vue {
     // 開始から終了までを切り出して表示用リストに格納
     this.currentEmployeeList = targetList.slice(starNum, endNum);
   }
+  
   /*
    * 初期表示用共通メソッド.
+   *
+   * @remarks
+   * ・初期表示は0からMAX_EMPLOYEE_COUNT個表示
+   * ・ページ番号を１に初期化
    */
   private initialDisplay(): void {
-    // 初期表示は0からMAX_EMPLOYEE_COUNT個表示
     this.currentEmployeeList = this.currentEmployeeList.slice(
       0,
       this.MAX_EMPLOYEE_COUNT
     );
-    // 1ページに変更
     this.currentPageNum = 1;
   }
 }
