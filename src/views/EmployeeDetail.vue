@@ -146,7 +146,7 @@ export default class EmployeeDetail extends Vue {
    */
   async created(): Promise<void> {
     // ログインしていなければログイン画面へ遷移
-    if (this.$store.getters.getLoginStatus == false) {
+    if (this.$store.getters.getLoginStatus === false) {
       this.$router.push("/loginAdmin");
       return;
     }

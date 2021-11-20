@@ -141,7 +141,7 @@ export default new Vuex.Store({
       // 渡されたIDで絞り込んだEmployeeオブジェクトを1件返す
       return (employeeId: number) => {
         const employees = state.employees.filter(
-          (employee) => employee.id == employeeId
+          (employee) => employee.id === employeeId
         );
         return employees[0];
       };

@@ -163,7 +163,7 @@ export default class RegisterAdmin extends Vue {
    */
   async registerAdmin(): Promise<void> {
     // 入力値エラーチェックし、エラーが１つ以上あれば処理を止める
-    if (this.hasErrors() == true) {
+    if (this.hasErrors()) {
       return;
     }
 

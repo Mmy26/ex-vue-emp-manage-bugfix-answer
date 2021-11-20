@@ -52,14 +52,14 @@
     </div>
     <div class="row">
       <ul class="pagination">
-        <span v-if="currentPageNum == 1">
+        <span v-if="currentPageNum === 1">
           <li class="disabled">
             <router-link to="/employeeList">
               <i class="material-icons">chevron_left</i>
             </router-link>
           </li>
         </span>
-        <span v-if="currentPageNum != 1">
+        <span v-if="currentPageNum !== 1">
           <li>
             <router-link
               to="/employeeList"
@@ -70,7 +70,7 @@
           </li>
         </span>
         <span v-for="pageNum of pageNums" v-bind:key="pageNum">
-          <li v-if="pageNum == currentPageNum" class="active">
+          <li v-if="pageNum === currentPageNum" class="active">
             <router-link
               to="/employeeList"
               v-on:click.native="pagingLinkClick(pageNum)"
@@ -78,7 +78,7 @@
               {{ pageNum }}
             </router-link>
           </li>
-          <li v-if="pageNum != currentPageNum" class="waves-effect">
+          <li v-if="pageNum !== currentPageNum" class="waves-effect">
             <router-link
               to="/employeeList"
               v-on:click.native="pagingLinkClick(pageNum)"
@@ -87,14 +87,14 @@
             </router-link>
           </li>
         </span>
-        <span v-if="currentPageNum == maxPageNum">
+        <span v-if="currentPageNum === maxPageNum">
           <li class="disabled">
             <router-link to="/employeeList">
               <i class="material-icons">chevron_right</i>
             </router-link>
           </li>
         </span>
-        <span v-if="currentPageNum != maxPageNum">
+        <span v-if="currentPageNum !== maxPageNum">
           <li>
             <router-link
               to="/employeeList"
@@ -145,7 +145,7 @@ export default class EmployeeList extends Vue {
    */
   async created(): Promise<void> {
     // ログインしていなければログイン画面へ遷移
-    if (this.$store.getters.getLoginStatus == false) {
+    if (this.$store.getters.getLoginStatus === false) {
       this.$router.push("/loginAdmin");
       return;
     }
@@ -191,7 +191,7 @@ export default class EmployeeList extends Vue {
     );
 
     // 検索されない場合は、メッセージを出して全件検索を行う
-    if (this.currentEmployeeList.length == 0 || this.searchName === "") {
+    if (this.currentEmployeeList.length === 0 || this.searchName === "") {
       this.searchNameMessage = "１件もありませんでしたので全件検索します";
       this.currentEmployeeList = this.$store.getters.getAllEmployees;
       this.searchName = "";
@@ -263,7 +263,7 @@ export default class EmployeeList extends Vue {
     // 開始から終了までを切り出して表示用リストに格納
     this.currentEmployeeList = targetList.slice(starNum, endNum);
   }
-  
+
   /*
    * 初期表示用共通メソッド.
    *

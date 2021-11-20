@@ -12,11 +12,11 @@
           <router-link to="/registerAdmin">
             管理者登録
           </router-link>
-          <router-link to="/loginAdmin" v-if="isLogin == false">
-            <i class="fas fa-sign-in-alt"></i>ログイン
-          </router-link>
-          <router-link to="/logoutAdmin" v-if="isLogin == true">
+          <router-link to="/logoutAdmin" v-if="isLogin">
             <i class="fas fa-sign-in-alt"></i>ログアウト
+          </router-link>
+          <router-link to="/loginAdmin" v-if="!isLogin">
+            <i class="fas fa-sign-in-alt"></i>ログイン
           </router-link>
         </div>
       </div>
