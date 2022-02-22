@@ -94,13 +94,20 @@ export default new Vuex.Store({
       }
 
       // 入社日の降順で(新しい入社日の人が上に来るように)並び替え
-      state.employees.sort(function(boforeEmployee, afterEmployee) {
-        if (afterEmployee.hireDate > boforeEmployee.hireDate) {
-          return 1;
-        } else {
-          return -1;
+      state.employees.sort(
+        (boforeEmployee: Employee, afterEmployee: Employee) => {
+          if (afterEmployee.hireDate > boforeEmployee.hireDate) {
+            // afterEmployeeの方が新しかったら、afterEmployeeを後ろに持っていくよう1を返す
+            return 1;
+          }
+          if (afterEmployee.hireDate < boforeEmployee.hireDate) {
+            // boforeEmployeeの方が新しかったら、boforeEmployeeを後ろに持っていくよう-1を返す
+            return -1;
+          }
+          // 同じ日付だったら並び替えをしないため0を返す
+          return 0;
         }
-      });
+      );
     },
   }, // end mutations
   getters: {

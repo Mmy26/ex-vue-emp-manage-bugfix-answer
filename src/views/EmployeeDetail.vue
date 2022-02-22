@@ -152,7 +152,7 @@ export default class EmployeeDetail extends Vue {
     }
 
     // 送られてきたリクエストパラメータのidをnumberに変換して取得する
-    const employeeId = parseInt(this.$route.params.id);
+    const employeeId = Number(this.$route.params.id);
 
     // VuexストアのGetter、getEmployeeById()メソッドに先ほど取得したIDを渡し、１件の従業員情報を取得し、戻り値をcurrentEmployee属性に代入する
     // this.currentEmployee = this.$store.getters.getEmployeeById(employeeId);
@@ -167,9 +167,7 @@ export default class EmployeeDetail extends Vue {
       responseEmployee.name,
       responseEmployee.image,
       responseEmployee.gender,
-      // 入社日を文字列からDateオブジェクトに変換(parse使用時月を-1しなくても問題ない作りになっている)
-      // https://date-fns.org/v2.25.0/docs/parse 一番下のExamplesに記載
-      parse(responseEmployee.hireDate, "yyyy-MM-dd", new Date()),
+      new Date(responseEmployee.hireDate),
       responseEmployee.mailAddress,
       responseEmployee.zipCode,
       responseEmployee.address,
